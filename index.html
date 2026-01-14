@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wtcoupon - Smart Coupons Automation Plugin for WooCommerce. Boost AOV and Conversions with dynamic discounts.">
+    <meta name="author" content="Manas Sharma">
+    <title>Wtcoupon - Smart Coupons Automation Plugin</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,900;1,9..40,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,900;1,9..40,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #4f46e5; /* Indigo */
+            --primary-dark: #4338ca;
+            --secondary-color: #1e1b4b; /* Deep Navy */
+            --accent-color: #10b981; /* Emerald Green */
+            --bg-light: #f8fafc;
+            
+            /* Font Variables */
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: #334155;
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, .navbar-brand, .btn {
+            font-family: var(--font-heading);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #64748b;
+            margin: 0 10px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #eef2ff 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-heading {
+            font-weight: 800;
+            color: var(--secondary-color);
+            font-size: 3.5rem;
+            line-height: 1.1;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-heading { font-size: 2.5rem; }
+        }
+
+        /* Buttons */
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 32px;
+            font-weight: 700;
+            border-radius: 50px; /* Pill shape */
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid #cbd5e1;
+            color: #475569;
+            padding: 12px 32px;
+            font-weight: 700;
+            border-radius: 50px;
+        }
+
+        .btn-outline-custom:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: #fff;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 30px;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f1f5f9;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: #e0e7ff;
+            color: var(--primary-color);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 25px;
+        }
+
+        /* Pricing Section */
+        .pricing-card {
+            background: #fff;
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.15);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary-color);
+            transform: scale(1.02);
+            z-index: 2;
+        }
+
+        .price-value {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+        }
+
+        .check-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .check-list i {
+            color: var(--accent-color);
+            margin-right: 12px;
+            background: #dcfce7;
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: #94a3b8;
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        footer h5 {
+            color: #fff;
+            margin-bottom: 25px;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fa-solid fa-ticket me-2"></i>Wtcoupon
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#demo">Video Demo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="#pricing" class="btn btn-primary-custom text-white shadow-sm">Get Lifetime Deal</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="d-inline-flex align-items-center bg-white rounded-pill px-3 py-1 border shadow-sm mb-4">
+                        <span class="badge bg-success rounded-pill me-2">New</span>
+                        <span class="small fw-bold text-secondary">Lifetime Deal Now Active</span>
+                    </div>
+                    <h1 class="hero-heading mb-4">Discount Automation for WooCommerce</h1>
+                    <p class="lead text-secondary mb-5">
+                        Boost your conversions and Average Order Value (AOV) with dynamic bundles, cart progress bars, and auto-add free gifts. No monthly fees.
+                    </p>
+                    <div class="d-flex gap-3 flex-column flex-sm-row">
+                        <a href="#pricing" class="btn btn-primary-custom text-white">View Pricing Plans</a>
+                        <a href="#demo" class="btn btn-outline-custom"><i class="fa-solid fa-play me-2"></i>Watch Demo</a>
+                    </div>
+                    <div class="mt-4 pt-2 d-flex gap-4 text-secondary small fw-bold">
+                        <span><i class="fa-solid fa-circle-check text-success me-2"></i>WordPress Optimized</span>
+                        <span><i class="fa-solid fa-circle-check text-success me-2"></i>Mobile Friendly</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <div class="position-absolute top-0 end-0 translate-middle-y bg-primary opacity-10 rounded-circle" style="width: 200px; height: 200px; z-index: -1;"></div>
+                        
+                        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                           <div class="ratio ratio-16x9">
+<iframe src="https://www.youtube.com/embed/4aofjeaRWGI" title="Wtcoupon Demo" allowfullscreen></iframe>                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5 mw-100 mx-auto" style="max-width: 700px;">
+                <h2 class="fw-bold display-6 mb-3">Powerful Features</h2>
+                <p class="text-muted fs-5">Everything you need to create smart marketing campaigns and take your eCommerce business to the next level.</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Cart Value Discounts</h4>
+                        <p class="text-muted mb-0">Create flexible rules based on cart quantity, total value, or a combination of both to run targeted offers.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Dynamic Bundles</h4>
+                        <p class="text-muted mb-0">Build tiered offers and product bundles easily. Encourage customers to add more items to their cart.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-gift"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Auto-Add Free Gifts</h4>
+                        <p class="text-muted mb-0">Assign a product to a coupon. When applied, the gift is automatically added to the cart without manual effort.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-card d-flex align-items-start">
+                        <div class="icon-box me-4 flex-shrink-0" style="margin-bottom: 0;">
+                            <i class="fa-solid fa-bars-progress"></i>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-2">Real-Time Progress Bars</h4>
+                            <p class="text-muted mb-0">Visually show customers how much more they need to spend to unlock discounts or free shipping.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-card d-flex align-items-start">
+                        <div class="icon-box me-4 flex-shrink-0" style="margin-bottom: 0;">
+                            <i class="fa-brands fa-wordpress-simple"></i>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-2">Native Integration</h4>
+                            <p class="text-muted mb-0">Designed seamlessly for WordPress & WooCommerce. Compatible with mobile, tablet, and desktop.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-3">See It In Action</h2>
+                    <p class="text-muted mb-5">
+                        Watch how quickly you can set up a "Buy X Get Y" offer or a "Spend $100 Get Free Gift" rule.
+                    </p>
+                    <div class="ratio ratio-16x9 shadow-lg rounded-4 border border-white border-5">
+<iframe src="https://www.youtube.com/embed/4aofjeaRWGI" title="Wtcoupon Demo" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold display-6">Simple Lifetime Pricing</h2>
+                <p class="text-muted fs-5">Pay once. Use forever. Include lifetime free updates.</p>
+            </div>
+
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="pricing-card h-100 p-4">
+                        <h4 class="text-secondary fw-bold">Basic</h4>
+                        <div class="my-3">
+                            <span class="price-value">$9</span>
+                            <span class="text-muted">/lifetime</span>
+                        </div>
+                        <p class="small text-muted mb-4">Perfect for starters.</p>
+                        <hr class="text-muted opacity-25">
+                        <ul class="list-unstyled check-list mb-4">
+                            <li><i class="fa-solid fa-check"></i> <strong>5</strong> Websites</li>
+                            <li><i class="fa-solid fa-check"></i> Lifetime Updates</li>
+                            <li><i class="fa-solid fa-check"></i> Standard Support</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-custom w-100">Buy Basic</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="pricing-card h-100 p-4">
+                        <h4 class="text-secondary fw-bold">Standard</h4>
+                        <div class="my-3">
+                            <span class="price-value">$29</span>
+                            <span class="text-muted">/lifetime</span>
+                        </div>
+                        <p class="small text-muted mb-4">For growing businesses.</p>
+                        <hr class="text-muted opacity-25">
+                        <ul class="list-unstyled check-list mb-4">
+                            <li><i class="fa-solid fa-check"></i> <strong>25</strong> Websites</li>
+                            <li><i class="fa-solid fa-check"></i> Lifetime Updates</li>
+                            <li><i class="fa-solid fa-check"></i> Priority Support</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-custom w-100">Buy Standard</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="pricing-card popular h-100 p-4 bg-white shadow">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="text-primary fw-bold mb-0">Pro</h4>
+                            <span class="badge bg-primary rounded-pill">Best Value</span>
+                        </div>
+                        <div class="my-3">
+                            <span class="price-value text-primary">$49</span>
+                            <span class="text-muted">/lifetime</span>
+                        </div>
+                        <p class="small text-muted mb-4">For power users & developers.</p>
+                        <hr class="text-muted opacity-25">
+                        <ul class="list-unstyled check-list mb-4">
+                            <li><i class="fa-solid fa-check"></i> <strong>50</strong> Websites</li>
+                            <li><i class="fa-solid fa-check"></i> Lifetime Updates</li>
+                            <li><i class="fa-solid fa-check"></i> Priority Support</li>
+                            <li><i class="fa-solid fa-check"></i> All Features</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary-custom w-100 text-white shadow-sm">Buy Pro Plan</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="pricing-card h-100 p-4">
+                        <h4 class="text-secondary fw-bold">Agency</h4>
+                        <div class="my-3">
+                            <span class="price-value">$79</span>
+                            <span class="text-muted">/lifetime</span>
+                        </div>
+                        <p class="small text-muted mb-4">Maximum scale.</p>
+                        <hr class="text-muted opacity-25">
+                        <ul class="list-unstyled check-list mb-4">
+                            <li><i class="fa-solid fa-check"></i> <strong>100</strong> Websites</li>
+                            <li><i class="fa-solid fa-check"></i> Lifetime Updates</li>
+                            <li><i class="fa-solid fa-check"></i> Premium Support</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-custom w-100">Buy Agency</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-white fw-bold mb-4"><i class="fa-solid fa-ticket me-2"></i>Wtcoupon</h4>
+                    <p class="mb-4">
+                        Wtcoupon is the ultimate WooCommerce discount automation tool. Create rules, boost sales, and automate gifts.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-4"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="fs-4"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="fs-4"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="fw-bold">Product</h5>
+                    <ul class="list-unstyled d-grid gap-2">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#demo">Demo</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="fw-bold">Support</h5>
+                    <ul class="list-unstyled d-grid gap-2">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Vendor Dashboard</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <h5 class="fw-bold">Contact</h5>
+                    <ul class="list-unstyled d-grid gap-3">
+                        <li class="d-flex">
+                            <i class="fa-solid fa-location-dot mt-1 me-3 text-primary"></i>
+                            <span>Shiv City Phase 3, Ayodhya Bypass Road,<br>Bhopal, Madhya Pradesh, India</span>
+                        </li>
+                        <li class="d-flex">
+                            <i class="fa-solid fa-envelope mt-1 me-3 text-primary"></i>
+                            <a href="mailto:maxsharmafeb@gmail.com">maxsharmafeb@gmail.com</a>
+                        </li>
+                        <li class="d-flex">
+                            <i class="fa-solid fa-phone mt-1 me-3 text-primary"></i>
+                            <a href="tel:9301165863">+91 9301165863</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="border-secondary opacity-25 my-5">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0 small">&copy; 2024 Wtcoupon by Manas Sharma. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0 small"><i class="fa-solid fa-globe me-1"></i> Made in India</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
